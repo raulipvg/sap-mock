@@ -1,0 +1,20 @@
+services:
+  sap-mock:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sap-mock
+    ports:
+      - "${SAP_MOCK_PORT:-8080}:8080"
+    environment:
+      MOCK_TOKEN: ${MOCK_TOKEN:-dev-mock-token}
+      MOCK_SEED: ${MOCK_SEED:-42}
+      MOCK_DAYS_BACK: ${MOCK_DAYS_BACK:-120}
+      MOCK_RECORDS_PER_DAY: ${MOCK_RECORDS_PER_DAY:-120}
+      MOCK_LATENCY_MS_MIN: ${MOCK_LATENCY_MS_MIN:-250}
+      MOCK_LATENCY_MS_MAX: ${MOCK_LATENCY_MS_MAX:-1200}
+      MOCK_TIMEOUT_RATE: ${MOCK_TIMEOUT_RATE:-0.01}
+      MOCK_ERROR_RATE: ${MOCK_ERROR_RATE:-0.02}
+      MOCK_DUPLICATE_RATE: ${MOCK_DUPLICATE_RATE:-0.03}
+      MOCK_TIMEOUT_SECONDS: ${MOCK_TIMEOUT_SECONDS:-25}
+    restart: unless-stopped
